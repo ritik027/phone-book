@@ -1,3 +1,10 @@
+##About app
+
+This app is deployed using aws amplify
+To see this web app live use the following link: 
+https://master.d23sxibzefy7i2.amplifyapp.com/
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
