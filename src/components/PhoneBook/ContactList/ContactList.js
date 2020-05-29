@@ -1,19 +1,7 @@
 import React, {Component} from 'react';
 import './ContactList.css';
-
-
-const Contact = (props) =>{
-	
-	return(
-		<tr>
-    <td>{props.user.name}</td>
-    <td>{props.user.contact}</td>
-    <td>{props.user.location}</td>
-    <td><button className = "danger" onClick = {() => {
-    	props.onDeleteContact(props.index)}}>Delete</button></td>
-  </tr>
-		)
-}
+import Contact from '../Contact/Contact.js';
+import Pagination from '@material-ui/lab/Pagination';
 
 class AddContact extends Component{
 	state = {
@@ -29,14 +17,14 @@ class AddContact extends Component{
         <div class="wrap">
           <div class="search">
             <input type="text"
-									 class="searchTerm"
+									 className="searchTerm"
                    onChange = {(event) => {
                    	this.setState({search: event.target.value});
                    	this.props.onSearch(event.target.value);
                    }}
 									 placeholder="Search Contacts"/>
-              <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
+              <button type="submit" className="searchButton">
+                <i className="fa fa-search"></i>
               </button>
           </div>
         </div>
@@ -67,6 +55,7 @@ class AddContact extends Component{
 class ContactList extends Component{
 
 	data = {
+		currentPage: 1,
 		contactList: [{
 			name: 'Ajay',
 			contact: 84332,
@@ -104,38 +93,47 @@ class ContactList extends Component{
 	}
 
 	onSearch = text => {
-		const filteredContacts = this.data.contactList.filter((contact) => contact.name.indexOf(text)!==-1);
+		const filteredContacts = this.data.contactList.filter((contact) => contact.name.toLowerCase().indexOf(text.toLowerCase())!==-1);
 		this.setState({contactList: filteredContacts});
 	}
 
 	render(){
 		return(
 			<div className = "ContactList"> 
-			<h1>Add Contact</h1>
-			<AddContact
-				onAddContact = {this.onAddContact}
-				onSearch = {this.onSearch}
-			/>
-			<br />
-			<br />
-			<br />
-			<div className = "Contact">
-			<table>
-  <tr>
-    <th>Name</th>
-    <th>Contact</th>
-    <th>Location</th>
-    <th>Delete Contact</th>
-  </tr>
-  {this.state.contactList.map((user, index) => {
-  	return <Contact user = {user}
-										index = {index}
-										onDeleteContact = {this.onDeleteContact}/>
-  })
-  }
-  
-</table>
-			</div>
+				<h1>Add Contact</h1>
+				<AddContact
+					onAddContact = {this.onAddContact}
+					onSearch = {this.onSearch}
+				/>
+				<br />
+				<br />
+				<br />
+				<div className = "Contact">
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Contact</th>
+							<th>Location</th>
+							<th>Delete/Edit Contact</th>
+						</tr>
+						{this.state.contactList.slice((this.state.currentPage-1)*2, (this.state.currentPage-1)*2 + 2).map((user, index) => {
+							return <Contact user = {user}
+															key = {user.name}
+															index = {index}
+															onDeleteContact = {this.onDeleteContact}/>
+						})
+						}
+					</table>
+					<div style={{display: 'flex', justifyContent: 'center', marginTop: '40px'}}>
+						<Pagination
+							page={this.state.currentPage}
+							count={Math.ceil(this.state.contactList.length / 2)}
+							onChange = {(event, page) => {
+								this.setState({currentPage: page});
+							}}
+							color="primary" />
+					</div>
+				</div>
 			</div>
 			)
 	}
