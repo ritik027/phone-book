@@ -1,8 +1,10 @@
-##About app
-
+## Phone Book Web app
 This app is deployed using aws amplify
 To see this web app live use the following link: 
 https://master.d23sxibzefy7i2.amplifyapp.com/
+
+## App description
+User can add, edit and delete contacts. The search bar is given to search the contacts by name. The pagination is added to avoid overcrowding of list of contacts on same page. 3 fields are there for contact info- name, contact, email. User can enter these information and add the contact by clicking on add contact button. User can edit these contacts if he wants by selecting on the edit button in front of respective contact. User can delete contact by clicking on the delete button in front of respective contact.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
