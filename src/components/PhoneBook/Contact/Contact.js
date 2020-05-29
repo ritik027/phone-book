@@ -30,12 +30,12 @@ export default class Contact extends Component {
             }}
             style={{fontSize: '22px'}} />}
         </td>
-        <td>{this.state.currentView === 'View' ? this.state.user.location :
+        <td>{this.state.currentView === 'View' ? this.state.user.email :
           <input
-            value = {this.state.user.location}
+            value = {this.state.user.email}
             onChange = {(event) => {
               let value = event.target.value;
-              let user = {...this.state.user, location: value};
+              let user = {...this.state.user, email: value};
               this.setState({user});
             }}
             style={{fontSize: '22px'}} />}

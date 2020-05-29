@@ -7,7 +7,7 @@ class AddContact extends Component{
 	state = {
 		name: '',
 		contact: '',
-		location: '',
+		email: '',
 		search: ''
 	};
 
@@ -38,14 +38,14 @@ class AddContact extends Component{
                style={{fontSize: '22px'}}
 							 onChange = {(event) => { this.setState({contact: event.target.value})}}
 							 value = {this.state.contact} /> <br />
-				<span style={{display: 'inline-block', width: '120px', fontSize: '24px', marginBottom: '16px'}}>Location: </span>
+				<span style={{display: 'inline-block', width: '120px', fontSize: '24px', marginBottom: '16px'}}>Email: </span>
 				<input type = "text"
                style={{fontSize: '22px'}}
-               onChange = {(event) => { this.setState({location: event.target.value})}}
-							 value = {this.state.location}/> <br />
+               onChange = {(event) => { this.setState({email: event.target.value})}}
+							 value = {this.state.email}/> <br />
 				<button className='button button1' onClick={() => {
 					this.props.onAddContact(this.state);
-					this.setState({name: '', contact: '', location: ''});
+					this.setState({name: '', contact: '', email: ''});
         }}>Add Contact</button>
 			</div>
 			)
@@ -59,19 +59,51 @@ class ContactList extends Component{
 		contactList: [{
 			name: 'Ajay',
 			contact: 84332,
-			location: 'Germany'
+			email: 'ajay@gmail.com'
 		},{
 			name: 'Ritik',
 			contact: 12323,
-			location: 'India'
+			email: 'ritik@gmail.com'
 		},{
 			name: 'Rahul',
 			contact: 3233,
-			location: 'Australia'
+			email: 'rahul@gmail.com'
 		},{
 			name: 'Akash',
 			contact: 33411,
-			location: 'Usa'
+			email: 'akash@gmail.com'
+		},{
+			name: 'Ramesh',
+			contact: 8435772,
+			email: 'ramesh@gmail.com'
+		},{
+			name: 'Suresh',
+			contact: 1239874432,
+			email: 'suresh@gmail.com'
+		},{
+			name: 'Rakesh',
+			contact: 3288191,
+			email: 'rakesh@gmail.com'
+		},{
+			name: 'Rajesh',
+			contact: 33411,
+			email: 'rajesh@gmail.com'
+		},{
+			name: 'Ramrang',
+			contact: 84332,
+			email: 'ramrang@gmail.com'
+		},{
+			name: 'Satish',
+			contact: 12323,
+			email: 'satish@gmail.com'
+		},{
+			name: 'Suchen',
+			contact: 32332132,
+			email: 'suchen@gmail.com'
+		},{
+			name: 'Naveen',
+			contact: 33424321,
+			email: 'naveen@gmail.com'
 		}]
 	}
 
@@ -113,7 +145,7 @@ class ContactList extends Component{
 						<tr>
 							<th>Name</th>
 							<th>Contact</th>
-							<th>Location</th>
+							<th>Email</th>
 							<th>Delete/Edit Contact</th>
 						</tr>
 						{this.state.contactList.slice((this.state.currentPage-1)*2, (this.state.currentPage-1)*2 + 2).map((user, index) => {
